@@ -76,16 +76,5 @@ public class Movement_Player : MonoBehaviour
         cameraTransform.LookAt(transform.position+Vector3.up * cameraHeight* 0.5f);
     }
 
-   /* private void OnTriggerEnter(Collider other)
-    {
-       if( other.GetComponent<Coins>() != null)
-        {
-           n_coins++;
-            Debug.Log(n_coins);
-
-            Destroy(gameObject);
-
-        }
-    }*/
 
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Coins_Points : MonoBehaviour
 {
     [Header("UI_Coins")]
-    TextMeshProUGUI number_coins;
+    [SerializeField] private TextMeshProUGUI number_coins;
 
     public Coins[] coins;
 
@@ -20,7 +20,7 @@ public class Coins_Points : MonoBehaviour
     }
     private void Update()
     {
-       
+        UI_Coins_Points();
     }
     private void ContadorCoins()
     {
@@ -42,15 +42,16 @@ public class Coins_Points : MonoBehaviour
 
     }
 
-    public void Sumar_Coins()
+    public void UI_Coins_Points()
     {
-        //string point_Coins = n_coins.ToString();
+        string point_Coins = n_coins.ToString("Coins: "+ n_coins);
 
-        //number_coins.text = point_Coins;
-        n_coins++;
-        
+        number_coins.text = point_Coins;
+    }
 
-
+    public int Sumar_Coins()
+    {
+        return n_coins++;
     }
 
 
