@@ -8,10 +8,11 @@ public class Coins_Points : MonoBehaviour
     [Header("UI_Coins")]
     TextMeshProUGUI number_coins;
 
-    [Header("Coins")]
     public Coins[] coins;
+
     public int n_coins;
-    public LayerMask layerPlayer;
+
+
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class Coins_Points : MonoBehaviour
     }
     private void Update()
     {
-        
+       
     }
     private void ContadorCoins()
     {
@@ -41,12 +42,12 @@ public class Coins_Points : MonoBehaviour
 
     }
 
-    private void Sumar_Coins()
+    public void Sumar_Coins()
     {
-        string point_Coins = n_coins.ToString();
+        //string point_Coins = n_coins.ToString();
 
-        number_coins.text = point_Coins;
-
+        //number_coins.text = point_Coins;
+        n_coins++;
         
 
 

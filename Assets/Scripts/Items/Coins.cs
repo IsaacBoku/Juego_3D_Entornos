@@ -8,6 +8,8 @@ public class Coins : MonoBehaviour
     public int value_coins;
     LayerMask mask;
 
+    public int n_coins;
+    public Coins_Points points;
 
     public void RandomValue()
     {
@@ -22,9 +24,17 @@ public class Coins : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject)
+        if (other.GetComponent<Movement_Player>() != null)
         {
 
+            points.Sumar_Coins();
+
+
+            Destroy(gameObject);
+
         }
+            
+
+        
     }
 }

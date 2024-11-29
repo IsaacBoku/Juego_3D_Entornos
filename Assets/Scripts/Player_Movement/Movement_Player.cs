@@ -13,6 +13,10 @@ public class Movement_Player : MonoBehaviour
     public float cameraDistance;
     public float cameraSmootSpeed;
 
+    Coins_Points coins_Points;
+    public int n_coins;
+
+
     float cameraPitch; //Control vertical de la inclinacion de la camara
 
     private void Start()
@@ -71,5 +75,17 @@ public class Movement_Player : MonoBehaviour
 
         cameraTransform.LookAt(transform.position+Vector3.up * cameraHeight* 0.5f);
     }
+
+   /* private void OnTriggerEnter(Collider other)
+    {
+       if( other.GetComponent<Coins>() != null)
+        {
+           n_coins++;
+            Debug.Log(n_coins);
+
+            Destroy(gameObject);
+
+        }
+    }*/
 
 }
