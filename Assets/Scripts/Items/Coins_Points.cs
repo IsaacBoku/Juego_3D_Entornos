@@ -16,7 +16,7 @@ public class Coins_Points : MonoBehaviour
 
     private void Start()
     {
-        ContadorCoins();
+        //ContadorCoins();
     }
     private void Update()
     {
