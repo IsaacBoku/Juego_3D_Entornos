@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Menu_Manager : MonoBehaviour
 {
-    static Menu_Manager instance;
+    //static Menu_Manager instance;
 
     [Header("Menu Inicio")]
     public string nameScene;
 
-    private void Awake()
+    /*private void Awake()
     {
         if (instance == null)
         {
@@ -21,7 +21,7 @@ public class Menu_Manager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
+    }*/
     public void Change_Scene()
     {
         if (!string.IsNullOrEmpty(nameScene))

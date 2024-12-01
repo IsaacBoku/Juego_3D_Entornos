@@ -6,38 +6,49 @@ public class Movement_Player : MonoBehaviour
 {
     [Header("Player Settings")]
     public float moveSpeed;
-    public float mouseSensibility;
-    public Transform cameraTransform;
+    public float jumpForce;
+
+    [Header("Collision")]
+    public float groundDistance;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+
     [Header("Camera Settings")]
     public float cameraHeight;
     public float cameraDistance;
     public float cameraSmootSpeed;
+    public float mouseSensibility;
+    public Transform cameraTransform;
 
-    Coins_Points coins_Points;
-    public int n_coins;
-
+    [Header("Componets")]
+    Rigidbody rb;
 
     float cameraPitch; //Control vertical de la inclinacion de la camara
-
     private void Start()
     {
-        CursosSetUp();
+        //CursosSetUp();
+        rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
         PlayerMovementWASD();
         CameraFollow();
+        Debug.Log(isGroundedDetected());
+    }
+    private void FixedUpdate()
+    {
+        PlayerJump();
     }
     private void LateUpdate()
     {
         CameraSetUp();
     }
-
     void CursosSetUp()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    #region PlayerMovement
     void PlayerMovementWASD()
     {
         float moveX = 0f;
@@ -52,7 +63,16 @@ public class Movement_Player : MonoBehaviour
         Vector3 directionMovement = (transform.right * moveX + transform.forward *moveZ).normalized;
         transform.position += directionMovement * moveSpeed * Time.deltaTime;
     }
-
+    void PlayerJump()
+    {
+        if (Input.GetKey(KeyCode.Space) && isGroundedDetected())
+        {
+            Debug.Log("Ejecuta Jump");
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+        }
+    }
+    #endregion
+    #region Cameras
     void CameraFollow()
     {
         float mouseX = Input.GetAxis("Mouse X");
@@ -64,8 +84,6 @@ public class Movement_Player : MonoBehaviour
         cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
-
-
     }
     void CameraSetUp()
     {
@@ -75,6 +93,13 @@ public class Movement_Player : MonoBehaviour
 
         cameraTransform.LookAt(transform.position+Vector3.up * cameraHeight* 0.5f);
     }
+    #endregion
+    #region Collision
+    private bool isGroundedDetected() => Physics.Raycast(groundCheck.position, transform.TransformDirection(Vector3.down),groundDistance, groundMask);
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x , groundCheck.position.y - groundDistance, groundCheck.position.z));
+    }
+    #endregion
 }
